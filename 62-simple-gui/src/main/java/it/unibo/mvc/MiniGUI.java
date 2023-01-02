@@ -1,8 +1,11 @@
 package it.unibo.mvc;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -16,7 +19,8 @@ import java.util.Random;
  * such is just to be used to learn the basics, not as a template for your
  * applications.
  */
-public class MiniGUI {
+
+ public class MiniGUI {
 
     private static final String TITLE = "A very simple GUI application";
     private static final int PROPORTION = 5;
@@ -30,18 +34,28 @@ public class MiniGUI {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
         final JButton write = new JButton("Print a random number on standard output");
-        canvas.add(write, BorderLayout.CENTER);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
          * Handlers
          */
+        //part 1
+        final JPanel panel1 = new JPanel();
+        panel1.setLayout(new BoxLayout(panel1, BoxLayout.LINE_AXIS));
+        canvas.add(panel1,BorderLayout.CENTER);
+        panel1.add(write);
+        //part 2
+        final JTextField text =new JTextField("Result");
+        canvas.add(text,BorderLayout.NORTH);
+         
         write.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                System.out.println(randomGenerator.nextInt());
+               int i= randomGenerator.nextInt()/1000;
+               text.setText("result: "+Integer.toString(i));
             }
         });
+
     }
 
     private void display() {
